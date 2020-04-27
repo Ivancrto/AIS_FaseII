@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d62362a1-6eec-4a78-be65-7cc7c1d844c2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/es/codeurjc/ais/tictactoe/StatisticsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/es/codeurjc/ais/tictactoe/StatisticsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/es.codeurjc.ais/tic-tac-toe-enunciado/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/maven/es.codeurjc.ais/tic-tac-toe-enunciado/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/es.codeurjc.ais/tic-tac-toe-enunciado/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/META-INF/maven/es.codeurjc.ais/tic-tac-toe-enunciado/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/Board.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/ChatBD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/ChatBD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/ChatRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/ChatRepository.class" afterDir="false" />
@@ -19,6 +25,7 @@
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame$WinnerResult.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame$WinnerResult.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame$WinnerValue.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame$WinnerValue.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$1.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$ClientToServerAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$ClientToServerAction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$ClientToServerMsg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$ClientToServerMsg.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/TicTacToeHandler$Data.class" afterDir="false" />
@@ -27,7 +34,6 @@
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/User.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/UserRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/WebApp.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/es/codeurjc/ais/tictactoe/WebApp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/js/grafico.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/js/grafico.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,17 +74,20 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\X\projectAIS_II\AIS_FaseII" />
+      <recent name="C:\X\projectAIS\20A04\src\main\resources\static\js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="R:\Desktop\20A04\src\main\resources\templates" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\X\projectAIS\20A04\src\main\resources\static\js" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="WebApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="es.codeurjc.ais.tictactoe.WebApp" />
-      <module name="20A04" />
+      <module name="AIS_FaseII" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="es.codeurjc.ais.tictactoe.*" />
@@ -129,9 +138,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="Grafica arreglada" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="485" y="76" key="#WebApp" timestamp="1587327085245">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="2526" y="96" key="#WebApp" timestamp="1588004185528">
+      <screen x="1920" y="0" width="1920" height="1050" />
     </state>
+    <state x="2526" y="96" key="#WebApp/0.0.1536.834/1920.0.1920.1050@1920.0.1920.1050" timestamp="1588004185528" />
     <state x="485" y="76" key="#WebApp/0.0.1536.834@0.0.1536.834" timestamp="1587327085245" />
     <state x="574" y="133" key="#com.intellij.ide.util.MemberChooser" timestamp="1587332789455">
       <screen x="0" y="0" width="1536" height="834" />
@@ -185,9 +195,10 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="361" y="150" key="Vcs.Push.Dialog.v2/0.0.1536.834@0.0.1536.834" timestamp="1587593242114" />
-    <state x="465" y="241" key="com.intellij.ide.util.TipDialog" timestamp="1587592357091">
-      <screen x="0" y="0" width="1536" height="834" />
+    <state x="2501" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1588004273813">
+      <screen x="1920" y="0" width="1920" height="1050" />
     </state>
+    <state x="2501" y="303" key="com.intellij.ide.util.TipDialog/0.0.1536.834/1920.0.1920.1050@1920.0.1920.1050" timestamp="1588004273813" />
     <state x="465" y="241" key="com.intellij.ide.util.TipDialog/0.0.1536.834@0.0.1536.834" timestamp="1587592357091" />
     <state x="425" y="189" key="run.anything.popup" timestamp="1587473379513">
       <screen x="0" y="0" width="1536" height="834" />
