@@ -1,16 +1,22 @@
-package es.codeurjc.testing;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import es.codeurjc.shop.domain.ShopException;
 import es.codeurjc.shop.domain.customer.Customer;
@@ -28,8 +34,25 @@ import es.codeurjc.shop.notification.NotificationService;
 /*Se tiene que comprobar que la clase implementa correctamente las siguientes situaciones cuando se crea un pedido:
 Para su implementación, dado que se trata de tests unitarios, se usarán dobles para todas las
 dependencias de la clase: PurchaseRepository, CustomerService, ProductService y NotificationService.*/  
-public class pruebasUnitariasDobles {
 
+@RunWith(Parameterized.class)
+public class pruebasUnitariasDobles {
+	
+	/*Valores para usar en los test genericos*/
+	List<Pedido> pedidosGenericos;	
+	public void setUpTest(List<Pedido> pedidos) {	
+		pedidosGenericos= pedidos;
+	}
+	
+	@Parameters
+	public static Collection<Object[]> data(){
+		
+		testingScenarios scenes= new testingScenarios();
+	    Object[][] data= {{ scenes.correcto}, { scenes.noCredito}, { scenes.noStock}};
+	    return Arrays.asList(data);
+	}
+	/* *********************************** */
+	
 	PurchaseRepository purRep = mock(PurchaseRepository.class);
 	CustomerService cService = mock(CustomerService.class);
 	ProductService pService = mock(ProductService.class);
@@ -55,12 +78,13 @@ public class pruebasUnitariasDobles {
 		 assertEquals(null, e1.getMessage()); //el null se pasaria por parametro, asi comprobamos si funciona
 		 //Comprobamos si existe dicho producto
 		 Exception e2 = assertThrows(ProductNotFoundException.class,()-> productServ.getProduct(3)); 
-		 assertEquals(null, e2.getMessage()); 
+		 assertEquals(null, e2.getMessage()); 		 
 		 //Obtenems coste del producto
 		 Exception e3 = assertThrows(ProductNotFoundException.class,()-> productServ.getProductCost(3)); 
 		 assertEquals(null, e3.getMessage()); 
+		
 		 //UPDATEPRODUC de productServ 
-		// Product p = productServ.getProduct(3);
+		 //Product p = productServ.getProduct(3);
 		 //productServ.updateProduct(p.getId(), p.getName(), p.getCost(), p.getStock()-1);
 		 //CREATEPURCHASE de purchaseServi, al usar este metodo se actualiza el monedero del customer
 		 Exception e4 = assertThrows( ShopException.class, ()-> purchaseServ.createPurchase(6, 3));
@@ -98,7 +122,7 @@ public class pruebasUnitariasDobles {
 		assertThat("mensaje" ,pService.getProduct(p.getId()).getStock(), equalTo(4)); //is(4)
 		assertThat(cService.getCustomer(c.getId()).getCredit(),  equalTo(99)); //is(99)
 		verify(nService,times(1)).notify("Purchase: customer=" + c.getId() + ", product=" + c.getId());	//Comprobamos que se haya enviado la notificacion
-	
+		System.out.println(c.getId());
 	}
 	
 	/*El pedido no se realiza cuando el cliente no tiene crédito. Se verifica que la excepción es la
