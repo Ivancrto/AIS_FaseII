@@ -39,7 +39,7 @@ public class pruebasUnitariasDobles {
 	Además, la notificación se envía.*/
 	
 	@Test
-	public void generico() throws ShopException {
+	public void generico()  {
 		
 		//Given
 		PurchaseRepository purchaseRep = mock(PurchaseRepository.class); //Este mock no se usa para nada, ya que las modificaciones al repo
@@ -60,17 +60,33 @@ public class pruebasUnitariasDobles {
 		 Exception e3 = assertThrows(ProductNotFoundException.class,()-> productServ.getProductCost(3)); 
 		 assertEquals(null, e3.getMessage()); 
 		 //UPDATEPRODUC de productServ 
-		 Product p = productServ.getProduct(3);
-		 productServ.updateProduct(p.getId(), p.getName(), p.getCost(), p.getStock()-1);
+		// Product p = productServ.getProduct(3);
+		 //productServ.updateProduct(p.getId(), p.getName(), p.getCost(), p.getStock()-1);
 		 //CREATEPURCHASE de purchaseServi, al usar este metodo se actualiza el monedero del customer
 		 Exception e4 = assertThrows( ShopException.class, ()-> purchaseServ.createPurchase(6, 3));
 		 assertEquals(null, e4.getMessage()); 
-		 //POR ULTIMO COMPROBAMO EL PRURCHASE CON GET PURCHASE
-		 
-		 
-		 
+		 //POR ULTIMO COMPROBAMO EL PRURCHASE CON GET PURCHASE 
 		 
 	}
+	
+	
+	@Test
+	public void genericoExcepciones() {
+		//Given
+		PurchaseRepository purchaseRep = mock(PurchaseRepository.class); //Este mock no se usa para nada, ya que las modificaciones al repo
+																		//se hace mediante los Services
+		CustomerService customerServ = mock(CustomerService.class);
+		ProductService productServ = mock(ProductService.class);
+		NotificationService notificationServ = mock(NotificationService.class);	
+		
+		PurchaseService purchaseServ = new PurchaseService(purchaseRep, customerServ, productServ, notificationServ);
+		
+		Exception e1 = assertThrows(CustomerNotFoundException.class,()-> customerServ.getCustomer(16123)); 
+		assertEquals("8435011945389762511L", e1.getMessage()); 
+	}
+	
+	
+	
 	
 	@Test
 	public void PurchaseService_CreditoYProducto() throws ShopException {
