@@ -3,6 +3,7 @@ package es.codeurjc.testing;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -30,13 +31,47 @@ dependencias de la clase: PurchaseRepository, CustomerService, ProductService y 
 public class pruebasUnitariasDobles {
 
 	PurchaseRepository purRep = mock(PurchaseRepository.class);
-	
 	CustomerService cService = mock(CustomerService.class);
 	ProductService pService = mock(ProductService.class);
 	NotificationService nService = mock(NotificationService.class);	
 
 	/*El pedido se realiza correctamente cuando el cliente tiene crédito y el producto stock.
 	Además, la notificación se envía.*/
+	
+	@Test
+	public void generico() throws ShopException {
+		
+		//Given
+		PurchaseRepository purchaseRep = mock(PurchaseRepository.class); //Este mock no se usa para nada, ya que las modificaciones al repo
+																		//se hace mediante los Services
+		CustomerService customerServ = mock(CustomerService.class);
+		ProductService productServ = mock(ProductService.class);
+		NotificationService notificationServ = mock(NotificationService.class);	
+		
+		PurchaseService purchaseServ = new PurchaseService(purchaseRep, customerServ, productServ, notificationServ);
+		
+		//Comprobamos si existe dicho comprador
+		 Exception e1 = assertThrows(CustomerNotFoundException.class,()-> customerServ.getCustomer(6)); //el 6 se pasaria por parametro
+		 assertEquals(null, e1.getMessage()); //el null se pasaria por parametro, asi comprobamos si funciona
+		 //Comprobamos si existe dicho producto
+		 Exception e2 = assertThrows(ProductNotFoundException.class,()-> productServ.getProduct(3)); 
+		 assertEquals(null, e2.getMessage()); 
+		 //Obtenems coste del producto
+		 Exception e3 = assertThrows(ProductNotFoundException.class,()-> productServ.getProductCost(3)); 
+		 assertEquals(null, e3.getMessage()); 
+		 //UPDATEPRODUC de productServ 
+		 Product p = productServ.getProduct(3);
+		 productServ.updateProduct(p.getId(), p.getName(), p.getCost(), p.getStock()-1);
+		 //CREATEPURCHASE de purchaseServi, al usar este metodo se actualiza el monedero del customer
+		 Exception e4 = assertThrows( ShopException.class, ()-> purchaseServ.createPurchase(6, 3));
+		 assertEquals(null, e4.getMessage()); 
+		 //POR ULTIMO COMPROBAMO EL PRURCHASE CON GET PURCHASE
+		 
+		 
+		 
+		 
+	}
+	
 	@Test
 	public void PurchaseService_CreditoYProducto() throws ShopException {
 		Product p=pService.createProduct("Pan de Pipas",1,5);
