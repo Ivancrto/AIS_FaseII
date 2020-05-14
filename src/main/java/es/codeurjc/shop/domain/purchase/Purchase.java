@@ -13,7 +13,7 @@ public class Purchase {
 
     Purchase() {}
 
-    Purchase(long customerId, long productId) {
+    public Purchase(long customerId, long productId) {
         setCustomerId(customerId);
         setProductId(productId);
     }
