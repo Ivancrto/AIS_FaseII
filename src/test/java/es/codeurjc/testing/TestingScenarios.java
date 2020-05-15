@@ -1,12 +1,18 @@
+package es.codeurjc.testing;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class testingScenarios {
+public class TestingScenarios {
+	
 	public List<Pedido> scenario1;
 	public List<Pedido> scenario2;
 	public List<Pedido> scenario3;
 	
-	public void TestingScenarios() {
+	
+	TestingScenarios() {
+
+		
 		scenario1= new ArrayList<Pedido>();
 		scenario2= new ArrayList<Pedido>();
 		scenario3= new ArrayList<Pedido>();
@@ -17,6 +23,6 @@ public class testingScenarios {
 		scenario2.add(p);		//Caso sin credito
 		p=new Pedido(3, 1, 4999, 1, 1, 0, 0, 0);
 		scenario3.add(p);	//Caso sin stock
-	}
+		}
 
 }
