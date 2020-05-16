@@ -15,7 +15,7 @@ public class Pedido {
 	public Pedido() {		
 	}
 
-	public Pedido(long idP, long idC, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save) {
+	public Pedido(long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save) {
 		this.idP = idP;
 		this.idC = idC;
 		this.cost = cost;
