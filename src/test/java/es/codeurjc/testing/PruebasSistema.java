@@ -1,9 +1,18 @@
 package es.codeurjc.testing;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,47 +20,84 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import es.codeurjc.shop.Application;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+@RunWith(Parameterized.class)
 public class PruebasSistema {
 
+	@Parameters
+	public static Collection<Object[]> data() {
 
-    private List<WebDriver> drivers = new ArrayList<WebDriver>();
+		TestingScenarios scenarios = new TestingScenarios();
 
-    @BeforeAll
-    public static void setupClass() {
-            WebDriverManager.chromedriver().setup();
-            Application.start();
-    }
+		Object[][] data = { { scenarios.scenario1 }, { scenarios.scenario1 }, { scenarios.scenario1 } };
 
-    @BeforeAll
-    public static void teardownClass() {
-            Application.stop();
-    }
+		return Arrays.asList(data);
+	}
 
-    @BeforeEach
-    public void setupTest() {
-        drivers.add(new ChromeDriver());
-        drivers.add(new ChromeDriver());
-    }
+	@Parameter(0)
+	public List<Pedido> pedidoGenerico;
 
-    @AfterEach
-    public void teardown() {
-    	for(WebDriver driver : drivers) {
-            if (driver != null) {
-                    driver.quit();
-            }
-    	}
-    	drivers.clear();
-    }
-    
+	private List<WebDriver> drivers = new ArrayList<WebDriver>();
+
+	@BeforeAll
+	public static void setupClass() {
+		WebDriverManager.chromedriver().setup();
+		Application.start();
+	}
+
+	@BeforeAll
+	public static void teardownClass() {
+		Application.stop();
+	}
+
+	@BeforeEach
+	public void setupTest() {
+		drivers.add(new ChromeDriver());
+		drivers.add(new ChromeDriver());
+	}
+
+	@AfterEach
+	public void teardown() {
+		for (WebDriver driver : drivers) {
+			if (driver != null) {
+				driver.quit();
+			}
+		}
+		drivers.clear();
+	}
 
 	@Test
 	public void Test() throws InterruptedException {
-		for(WebDriver driver : drivers) {
+		for (WebDriver driver : drivers) {
 			driver.get("http://localhost:8080");
 		}
-		drivers.get(0).findElement(By.id("product-3")).click();
-		drivers.get(0).findElement(By.id("customer-id")).sendKeys("6");
-		drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click();
-		System.out.println(drivers.get(0).findElement(By.id("message")).getText());
+		if (pedidoGenerico.get(0).getIdP() != 3) {
+			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click(); // numero del
+																									// producto
+			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
+																														// del
+																														// customer
+			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
+			String mensaje = drivers.get(0).findElement(By.id("message"))
+					.getText(); /*
+								 * Pasamos al siguiente html donde nos encontramos con el mensaje, que tendremos
+								 * que validar
+								 */
+			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
+		}else {
+			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click();
+			drivers.get(1).findElement(By.id("product-" + pedidoGenerico.get(1).getIdP())).click();
+			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero cliente
+			drivers.get(1).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(1).getIdC())); // numero cliente 
+			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
+			//Thread.sleep(1000);
+			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
+			String mensaje0 = drivers.get(0).findElement(By.id("message")).getText();
+			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
+			String mensaje1 = drivers.get(1).findElement(By.id("message")).getText(); 
+			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que
+			
+		}
+		
 	}
+	
 }

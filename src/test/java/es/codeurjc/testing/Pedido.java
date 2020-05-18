@@ -26,6 +26,19 @@ public class Pedido {
 		this.save = save;
 		this.msg="Purchase: customer=" + this.idC + ", product=" + this.idP;
 	}
+	
+	public Pedido(long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save, String msg) {
+		this.idP = idP;
+		this.idC = idC;
+		this.cost = cost;
+		this.getProductCost = getProductCost;
+		this.withdrawProduct = withdrawProduct;
+		this.reserveCredit = reserveCredit;
+		this.notify = notify;
+		this.save = save;
+		this.msg= msg;
+	}
+	
 
 	public long getIdP() {
 		return idP;
