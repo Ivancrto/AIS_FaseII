@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.jupiter.api.*;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
@@ -28,7 +28,7 @@ public class PruebasSistema {
 
 		TestingScenarios scenarios = new TestingScenarios();
 
-		Object[][] data = { { scenarios.scenario1 }, { scenarios.scenario1 }, { scenarios.scenario1 } };
+		Object[][] data = { { scenarios.scenario1W }, { scenarios.scenario2W }, { scenarios.scenario3W } };
 
 		return Arrays.asList(data);
 	}
@@ -38,24 +38,24 @@ public class PruebasSistema {
 
 	private List<WebDriver> drivers = new ArrayList<WebDriver>();
 
-	@BeforeAll
+	@BeforeClass
 	public static void setupClass() {
 		WebDriverManager.chromedriver().setup();
 		Application.start();
 	}
 
-	@BeforeAll
+	@AfterClass
 	public static void teardownClass() {
 		Application.stop();
 	}
 
-	@BeforeEach
+	@Before
 	public void setupTest() {
 		drivers.add(new ChromeDriver());
 		drivers.add(new ChromeDriver());
 	}
 
-	@AfterEach
+	@After
 	public void teardown() {
 		for (WebDriver driver : drivers) {
 			if (driver != null) {
@@ -70,7 +70,7 @@ public class PruebasSistema {
 		for (WebDriver driver : drivers) {
 			driver.get("http://localhost:8080");
 		}
-		if (pedidoGenerico.get(0).getIdP() != 3) {
+		if (pedidoGenerico.get(0).getIdP() != 1) {
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click(); // numero del
 																									// producto
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
@@ -83,21 +83,23 @@ public class PruebasSistema {
 								 * que validar
 								 */
 			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
-		}else {
+		} else {
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click();
 			drivers.get(1).findElement(By.id("product-" + pedidoGenerico.get(1).getIdP())).click();
-			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero cliente
-			drivers.get(1).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(1).getIdC())); // numero cliente 
+			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
+																														// cliente
+			drivers.get(1).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(1).getIdC())); // numero
+																														// cliente
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			//Thread.sleep(1000);
+			// Thread.sleep(1000);
 			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
 			String mensaje0 = drivers.get(0).findElement(By.id("message")).getText();
 			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
-			String mensaje1 = drivers.get(1).findElement(By.id("message")).getText(); 
+			String mensaje1 = drivers.get(1).findElement(By.id("message")).getText();
 			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que
-			
+
 		}
-		
+
 	}
-	
+
 }

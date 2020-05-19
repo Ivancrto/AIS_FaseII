@@ -35,7 +35,7 @@ public class TestingScenarios {
 		
 		//long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save
 		scenario1W.add(new Pedido(6, 3, 350, 1, 1, 1, 1, 1,"Successful purchase"));
-		scenario2W.add(new Pedido(5, 1, 350, 1, 1, 1, 1, 1,"Error: CustomerCreditLimitExceededException"));
+		scenario2W.add(new Pedido(5, 3, 350, 1, 1, 1, 1, 1,"Error: CustomerCreditLimitExceededException"));
 		scenario3W.add(new Pedido(6, 1, 350, 1, 1, 1, 1, 1,"Successful purchase"));
 		scenario3W.add(new Pedido(4, 1, 350, 1, 1, 1, 1, 1,"Error: ProductStockWithdrawExceededException"));
 		}
