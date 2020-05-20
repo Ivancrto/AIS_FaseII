@@ -7,11 +7,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameter;
-import org.junit.runners.Parameterized.Parameters;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,42 +18,36 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import es.codeurjc.shop.Application;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@RunWith(Parameterized.class)
+
 public class PruebasSistema {
 
-	@Parameters
+
 	public static Collection<Object[]> data() {
-
 		TestingScenarios scenarios = new TestingScenarios();
-
 		Object[][] data = { { scenarios.scenario1W }, { scenarios.scenario2W }, { scenarios.scenario3W } };
-
 		return Arrays.asList(data);
 	}
 
-	@Parameter(0)
-	public List<Pedido> pedidoGenerico;
 
 	private List<WebDriver> drivers = new ArrayList<WebDriver>();
 
-	@BeforeClass
+	@BeforeAll
 	public static void setupClass() {
 		WebDriverManager.chromedriver().setup();
 		Application.start();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void teardownClass() {
 		Application.stop();
 	}
 
-	@Before
+	@BeforeEach
 	public void setupTest() {
-		drivers.add(new ChromeDriver());
 		drivers.add(new ChromeDriver());
 	}
 
-	@After
+	@AfterEach
 	public void teardown() {
 		for (WebDriver driver : drivers) {
 			if (driver != null) {
@@ -65,12 +57,13 @@ public class PruebasSistema {
 		drivers.clear();
 	}
 
-	@Test
-	public void Test() throws InterruptedException {
-		for (WebDriver driver : drivers) {
-			driver.get("http://localhost:8080");
-		}
+	
+	@ParameterizedTest
+	@MethodSource("data")
+	public void Test(ArrayList<Pedido> pedidoGenerico) throws InterruptedException {
+	
 		if (pedidoGenerico.get(0).getIdP() != 1) {
+			inicializar();
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click(); // numero del
 																									// producto
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
@@ -84,6 +77,8 @@ public class PruebasSistema {
 								 */
 			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
 		} else {
+			drivers.add(new ChromeDriver());//Creamos otro para el otro usuario
+			inicializar();
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click();
 			drivers.get(1).findElement(By.id("product-" + pedidoGenerico.get(1).getIdP())).click();
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
@@ -100,6 +95,13 @@ public class PruebasSistema {
 
 		}
 
+	}
+	
+	public void inicializar() {
+		for (WebDriver driver : drivers) {
+			driver.get("http://localhost:8080");
+		}
+		
 	}
 
 }
