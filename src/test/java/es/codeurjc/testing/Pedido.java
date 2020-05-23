@@ -1,5 +1,8 @@
 package es.codeurjc.testing;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Pedido {
 	
 	long idP;
@@ -11,6 +14,10 @@ public class Pedido {
 	int notify;
 	int save;
 	String msg;
+	int statusAPI;
+	String idAPI;
+	int valueID;
+	List<String> messageAPI;
 
 	public Pedido() {		
 	}
@@ -39,6 +46,18 @@ public class Pedido {
 		this.msg= msg;
 	}
 	
+
+
+	public Pedido(long idP, long idC, int statusAPI,String m, String messageAPI, String idAPI,int id) {
+		this.idP = idP;
+		this.idC = idC;
+		this.statusAPI = statusAPI;
+		this.idAPI=idAPI;
+		this.valueID=id;
+		this.messageAPI= Arrays.asList(m,messageAPI);
+
+
+	}
 
 	public long getIdP() {
 		return idP;
@@ -112,6 +131,43 @@ public class Pedido {
 		this.msg = msg;
 	}
 
-	
+	public int getStatusAPI() {
+		return statusAPI;
+	}
+
+	public void setStatusAPI(int statusAPI) {
+		this.statusAPI = statusAPI;
+	}
+
+
+	public List<String> getMessageAPI() {
+		return messageAPI;
+	}
+
+	public void setMessageAPI(List<String> messageAPI) {
+		this.messageAPI = messageAPI;
+	}
+
+	public String getIdAPI() {
+		return idAPI;
+	}
+
+	public void setIdAPI(String idAPI) {
+		this.idAPI = idAPI;
+	}
+
+	public int getValueID() {
+		return valueID;
+	}
+
+	public void setValueID(int valueID) {
+		this.valueID = valueID;
+	}
+
+
+
 	
 }
+
+	
+	

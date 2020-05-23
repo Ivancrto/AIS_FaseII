@@ -8,9 +8,14 @@ public class TestingScenarios {
 	public List<Pedido> scenario1;
 	public List<Pedido> scenario2;
 	public List<Pedido> scenario3;
+	
 	public List<Pedido> scenario1W;
 	public List<Pedido> scenario2W;
 	public List<Pedido> scenario3W;
+	
+	public List<Pedido> scenario1API;
+	public List<Pedido> scenario2API;
+	public List<Pedido> scenario3API;
 	
 	
 	
@@ -23,6 +28,10 @@ public class TestingScenarios {
 		scenario1W= new ArrayList<Pedido>();
 		scenario2W= new ArrayList<Pedido>();
 		scenario3W= new ArrayList<Pedido>();
+		
+		scenario1API=new ArrayList<Pedido>();
+		scenario2API=new ArrayList<Pedido>();
+		scenario3API=new ArrayList<Pedido>();
 		
 		Pedido p=new Pedido(1, 1, 350, 1, 1, 1, 1, 1);
 		scenario1.add(p);	//Caso correcto
@@ -38,6 +47,13 @@ public class TestingScenarios {
 		scenario2W.add(new Pedido(5, 3, 350, 1, 1, 1, 1, 1,"Error: CustomerCreditLimitExceededException"));
 		scenario3W.add(new Pedido(6, 1, 350, 1, 1, 1, 1, 1,"Successful purchase"));
 		scenario3W.add(new Pedido(4, 1, 350, 1, 1, 1, 1, 1,"Error: ProductStockWithdrawExceededException"));
+
+		//long idP, long idC, int statusAPI,String m, String messageAPI, int id, String idAPI
+		
+		scenario1API.add(new Pedido(3, 6, 200,null, null,"id",7));
+		scenario2API.add(new Pedido(3, 5,400,"message","CustomerCreditLimitExceededException",null,0));
+		scenario3API.add(new Pedido(2, 4, 400,"message","ProductStockWithdrawExceededException",null,0));
+
 		}
 
 }
