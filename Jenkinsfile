@@ -8,7 +8,7 @@ pipeline {
        steps {
          git(
          	url:  'https://github.com/Ivancrto/AIS_FaseII.git',
-         	credentialsId: '79:13:c0:cc:e2:5f:44:56:10:8f:08:14:a7:21:14:4b',
+         	credentialsId: '2e:80:6e:40:36:91:0a:b8:57:82:b5:fb:7c:22:20:c7',
          	branch: 'master'
          )
        }
