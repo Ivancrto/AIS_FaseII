@@ -18,9 +18,11 @@ pipeline {
           script {
 			 if(isUnix()) {
 				 sh "./mvnw test"
-			 } else {
+			 } 
+			 else {
 				 bat(/mvnw.cmd test/)
 			 }
+       		}
        }
      }
    } 
