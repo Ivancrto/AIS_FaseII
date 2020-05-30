@@ -21,10 +21,10 @@ pipeline {
    } 
    post {
       always {
-	    junit "tema1_4_ejem2/**/target/surefire-reports/TEST-*.xml"
+	    junit "AIS_FaseII/**/target/surefire-reports/TEST-*.xml"
       }
       success {
-        archive "tema1_4_ejem2/target/*.jar"
+        archive "AIS_FaseII/target/*.jar"
       }
    }
 }
