@@ -15,9 +15,8 @@ pipeline {
      }
      stage("Test") {
        steps {
-          script {
-				 bat(/mvnw.cmd test/)
-       		}
+            echo " HOLAAA ESTO ES UNA PRUEBAAAAA "
+
        }
      }
    } 
