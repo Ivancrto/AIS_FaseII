@@ -6,8 +6,8 @@ pipeline {
    stages {
      stage("Preparation") { 
        steps {
-         git( 'https://github.com/Ivancrto/AIS_FaseII.git',
-	     branch: 'master')
+         git 'https://github.com/Ivancrto/AIS_FaseII.git'
+	    
        }
      }
      stage("Test") {
