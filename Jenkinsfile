@@ -15,9 +15,7 @@ pipeline {
      }
      stage("Test") {
        steps {
-          script {
-				 bat(/mvnw.cmd test/)
-       		}
+		bat(mvnw.cmd test)
        }
      }
    } 
