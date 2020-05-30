@@ -15,11 +15,9 @@ pipeline {
      }
      stage("Test") {
        steps {
-	       script{
-			sh "./mvnw test"
-	       }
+          sh "cd tema1_4_ejem2  ; mvn package"
        }
      }
-   } 
+   }
    
 }
