@@ -6,27 +6,25 @@ pipeline {
    stages {
      stage("Preparation") { 
        steps {
-         git 'https://github.com/Ivancrto/AIS_FaseII.git'
-	    
+         git(
+		 url: 'https://github.com/Ivancrto/AIS_FaseII.git',
+		 credentialsId: 'developer',
+		 branch: 'master'
+	 )       
        }
      }
      stage("Test") {
-       steps {     
-	   script {
-		 if(isUnix()) {
-			sh "./mvnw test"
-		 } else {
-			 bat(/mvnw.cmd test/)
-		 }
-	}
-	              
+       steps {
+          sh "cd tema1_4_ejem2  ; mvn package"
        }
      }
    } 
    post {
       always {
-	    junit "AIS_FaseII/**/target/surefire-reports/TEST-*.xml"
+	    junit "tema1_4_ejem2/**/target/surefire-reports/TEST-*.xml"
       }
-
+      success {
+        archive "tema1_4_ejem2/target/*.jar"
+      }
    }
 }
