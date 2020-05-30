@@ -6,8 +6,7 @@ pipeline {
    stages {
      stage("Preparation") { 
        steps {
-         git( 'https://github.com/Ivancrto/AIS_FaseII.git'
-	     credentialsId: 'developer',
+         git( 'https://github.com/Ivancrto/AIS_FaseII.git',
 	     branch: 'master')
        }
      }
