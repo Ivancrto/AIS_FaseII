@@ -19,7 +19,7 @@ pipeline {
 		 if(isUnix()) {
 			 sh "./mvnw test"
 		 } else {
-		 	echo "WINDOWS"
+		 	bat "mvn clean package"
 		 }
 		}
 
