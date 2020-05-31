@@ -15,7 +15,14 @@ pipeline {
      }
      stage("Test") {
        steps {
-          sh "cd tema1_4_ejem2  ; mvn package"
+          script {
+		 if(isUnix()) {
+			 sh "./mvnw test"
+		 } else {
+		 	echo "WINDOWS"
+		 }
+		}
+
        }
      }
    }
