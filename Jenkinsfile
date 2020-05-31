@@ -12,7 +12,7 @@ pipeline {
 		 branch: 'master'
 	 )       
        }
-     }}
+     }
      stage("Test") {
        steps {
           script {
@@ -22,7 +22,7 @@ pipeline {
 		 	bat(/mvnw.cmd test/)
 		 }
 	    
-
+	  }
        }
      }
    }
