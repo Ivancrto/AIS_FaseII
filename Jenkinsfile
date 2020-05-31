@@ -10,11 +10,8 @@ pipeline {
 		 url: 'https://github.com/Ivancrto/AIS_FaseII.git',
 		 credentialsId: 'developer',
 		 branch: 'master'
-	 )       
-       }
-     }
-    stage('Build') {
-	      // Run the maven build
+	 ) 
+	       // Run the maven build
 	      withEnv(["MVN_HOME=$mvnHome"]) {
 	         if (isUnix()) {
 	            sh '"$MVN_HOME/bin/mvn" -Dmaven.test.failure.ignore clean package'
@@ -22,8 +19,10 @@ pipeline {
 	         else {
 	            bat(/"%MVN_HOME%\bin\mvn" -Dmaven.test.failure.ignore clean package/)
 	         }
-	      }
-	}
+	      } 
+       }
+     }
+
      stage("Test") {
        steps {
           script {
