@@ -19,9 +19,9 @@ pipeline {
 		 if(isUnix()) {
 			 sh "./mvnw test"
 		 } else {
-		 	bat "mvn clean package"
+		 	bat(/mvnw.cmd test/)
 		 }
-		}
+	    }
 
        }
      }
