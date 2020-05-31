@@ -26,5 +26,15 @@ pipeline {
        }
      }
    }
+	post {
+	always {
+	junit "AIS_FaseII/**/target/surefire-reports/TEST-*.xml"
+	sh "kill \$(cat AIS_FaseII/target/pid)"
+	archive "AIS_FaseII/target/out.log"
+	}
+	success {
+	archive "AIS_FaseII/target/*.jar"
+	}
+	}
    
 }
