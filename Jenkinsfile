@@ -20,7 +20,6 @@ pipeline {
 			 		sh "./mvnw test"
 			 	} 
 				else {
-				bat("${mvnHome}/bin/mvn" test/)
 		 			bat(/mvnw.cmd test/)
 				}
 	    
