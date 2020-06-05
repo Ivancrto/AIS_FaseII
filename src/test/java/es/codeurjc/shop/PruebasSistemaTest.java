@@ -1,4 +1,4 @@
-package es.codeurjc.testing;
+package es.codeurjc.shop;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +19,7 @@ import es.codeurjc.shop.Application;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-public class PruebasSistema {
+public class PruebasSistemaTest {
 
 
 	public static Collection<Object[]> data() {
@@ -99,7 +99,7 @@ public class PruebasSistema {
 	
 	public void inicializar() {
 		for (WebDriver driver : drivers) {
-			driver.get("http://localhost:8080");
+			driver.get("http://localhost:8081");
 		}
 		
 	}

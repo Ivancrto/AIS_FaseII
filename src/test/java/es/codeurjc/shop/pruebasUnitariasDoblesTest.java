@@ -1,4 +1,4 @@
-package es.codeurjc.testing;
+package es.codeurjc.shop;
 
 import static org.mockito.Mockito.*;
 
@@ -23,7 +23,7 @@ import es.codeurjc.shop.notification.NotificationService;
 Para su implementación, dado que se trata de tests unitarios, se usarán dobles para todas las
 dependencias de la clase: PurchaseRepository, CustomerService, ProductService y NotificationService.*/
 
-public class pruebasUnitariasDobles {
+public class pruebasUnitariasDoblesTest {
 
 	public static Collection<Object[]> data() {
 

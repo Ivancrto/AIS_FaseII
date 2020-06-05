@@ -1,4 +1,4 @@
-package es.codeurjc.testing;
+package es.codeurjc.shop;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.CoreMatchers.*;
@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import es.codeurjc.shop.Application;
 
-public class PruebasSistemaApi {
+public class PruebasSistemaApiTest {
 
 
 	@BeforeAll
@@ -46,7 +46,7 @@ public class PruebasSistemaApi {
 			contentType("application/json").
 			body("{\"productId\":\""+pedidoGenerico.get(0).getIdP()+"\",\"customerId\":"+ pedidoGenerico.get(0).getIdC()+"}").
 	    	when().
-	    	post("http://localhost:8080/api/purchases/").
+	    	post("http://localhost:8081/api/purchases/").
 	    	then().assertThat().statusCode(equalTo(pedidoGenerico.get(0).getStatusAPI())).
 	    	body(pedidoGenerico.get(0).getIdAPI(), equalTo(pedidoGenerico.get(0).getValueID()));
 		}
@@ -55,7 +55,7 @@ public class PruebasSistemaApi {
 			contentType("application/json").
 			body("{\"productId\":\""+pedidoGenerico.get(0).getIdP()+"\",\"customerId\":"+ pedidoGenerico.get(0).getIdC()+"}").
 	    	when().
-	    	post("http://localhost:8080/api/purchases/").
+	    	post("http://localhost:8081/api/purchases/").
 	    	then().assertThat().statusCode(equalTo(pedidoGenerico.get(0).getStatusAPI())).
 	    	body(pedidoGenerico.get(0).getMessageAPI().get(0),equalTo(pedidoGenerico.get(0).getMessageAPI().get(1))	);
 		}

@@ -1,4 +1,4 @@
-package es.codeurjc.testing;
+package es.codeurjc.shop;
 
 import java.util.ArrayList;
 import java.util.List;

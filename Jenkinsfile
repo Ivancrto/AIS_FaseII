@@ -27,6 +27,14 @@ pipeline {
        	}
      }
    }
+	post {
+      always {
+	    junit "AIS_FaseII/**/target/surefire-reports/TEST-*.xml"
+      }
+      success {
+        archive "AIS_FaseII/target/*.jar"
+      }
+   }
 }
 
 
