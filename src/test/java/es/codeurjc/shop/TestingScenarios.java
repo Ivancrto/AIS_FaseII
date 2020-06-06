@@ -50,9 +50,9 @@ public class TestingScenarios {
 
 		//long idP, long idC, int statusAPI,String m, String messageAPI, int id, String idAPI
 		
-		scenario1API.add(new Pedido(3, 6, 200,null, null,"id",7));
-		scenario2API.add(new Pedido(3, 5,400,"message","CustomerCreditLimitExceededException",null,0));
-		scenario3API.add(new Pedido(2, 4, 400,"message","ProductStockWithdrawExceededException",null,0));
+		scenario1API.add(new Pedido(3, 6, 200,"id", "",7));
+		scenario2API.add(new Pedido(3, 5,400,"message","CustomerCreditLimitExceededException",0));
+		scenario3API.add(new Pedido(2, 4, 400,"message","ProductStockWithdrawExceededException",0));
 
 		}
 

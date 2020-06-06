@@ -48,7 +48,7 @@ public class PruebasSistemaApiTest {
 	    	when().
 	    	post("http://localhost:8081/api/purchases/").
 	    	then().assertThat().statusCode(equalTo(pedidoGenerico.get(0).getStatusAPI())).
-	    	body(pedidoGenerico.get(0).getIdAPI(), equalTo(pedidoGenerico.get(0).getValueID()));
+	    	body(pedidoGenerico.get(0).getMessageAPI().get(0), equalTo(pedidoGenerico.get(0).getValueID()));
 		}
 		else {
 			given().
@@ -61,39 +61,4 @@ public class PruebasSistemaApiTest {
 		}
     }
 	
-	/*@Test
-    public void test1() {
-        //el 3 y el statusCode se debe plantear en los escenarios como una sola variable
-		given().
-		contentType("application/json").
-		body("{\"productId\":\"3\",\"customerId\":10 }").
-    	when().
-    	post("http://localhost:8080/api/purchases/").
-    	then().assertThat().statusCode(equalTo(400)).
-    	body("error", equalTo("Bad Request"), "message",equalTo("CustomerNotFoundException"), "path",equalTo("/api/purchases/") );	//Lo de dentro del equalTo debemos aumentarlo en uno por cada escenario
-    }
-	
-	
-	@Test
-    public void test() {
-        //el 3 y el statusCode se debe plantear en los escenarios como una sola variable
-		given().
-		contentType("application/json").
-		body("{\"productId\":\"1\",\"customerId\":6 }").
-    	when().
-    	post("http://localhost:8080/api/purchases/").
-    	then().assertThat().statusCode(equalTo(400)).
-    	body("error", equalTo("Bad Request"), "message",equalTo("ProductStockWithdrawExceededException"), "path",equalTo("/api/purchases/") );	//Lo de dentro del equalTo debemos aumentarlo en uno por cada escenario
-    }
-	@Test
-    public void test() {
-        //el 3 y el statusCode se debe plantear en los escenarios como una sola variable
-		given().
-		contentType("application/json").
-		body("{\"productId\":\"3\",\"customerId\":5 }").
-    	when().
-    	post("http://localhost:8080/api/purchases/").
-    	then().assertThat().statusCode(equalTo(400)).
-    	body("error", equalTo("Bad Request"), "message",equalTo("CustomerCreditLimitExceededException"), "path",equalTo("/api/purchases/") );	//Lo de dentro del equalTo debemos aumentarlo en uno por cada escenario
-    }*/
 }

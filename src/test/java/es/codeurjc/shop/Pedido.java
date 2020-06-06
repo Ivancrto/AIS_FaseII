@@ -15,7 +15,6 @@ public class Pedido {
 	int save;
 	String msg;
 	int statusAPI;
-	String idAPI;
 	int valueID;
 	List<String> messageAPI;
 
@@ -48,11 +47,10 @@ public class Pedido {
 	
 
 
-	public Pedido(long idP, long idC, int statusAPI,String m, String messageAPI, String idAPI,int id) {
+	public Pedido(long idP, long idC, int statusAPI,String m, String messageAPI,int id) {
 		this.idP = idP;
 		this.idC = idC;
 		this.statusAPI = statusAPI;
-		this.idAPI=idAPI;
 		this.valueID=id;
 		this.messageAPI= Arrays.asList(m,messageAPI);
 
@@ -146,14 +144,6 @@ public class Pedido {
 
 	public void setMessageAPI(List<String> messageAPI) {
 		this.messageAPI = messageAPI;
-	}
-
-	public String getIdAPI() {
-		return idAPI;
-	}
-
-	public void setIdAPI(String idAPI) {
-		this.idAPI = idAPI;
 	}
 
 	public int getValueID() {
