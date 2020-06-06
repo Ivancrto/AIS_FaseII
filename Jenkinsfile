@@ -20,7 +20,7 @@ pipeline {
 			 		sh "./mvnw test"
 			 	} 
 				else {
-		 			bat(/mvnw.cmd test/)
+		 			 bat(/"${MAVEN_HOME}\bin\mvn" test/)
 				}
 	    
 			}
