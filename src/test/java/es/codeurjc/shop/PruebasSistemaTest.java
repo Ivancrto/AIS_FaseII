@@ -66,16 +66,14 @@ public class PruebasSistemaTest {
 
 		if (pedidoGenerico.get(0).getIdP() != 1) {
 			inicializar();
-			WebDriverWait wait = new WebDriverWait(drivers.get(0), 30);
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click(); // numero del
 																									// producto
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
 																														// del
 																														// customer
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
-			String mensaje = drivers.get(0).findElement(By.id("message")).getText(); 
-								/*
+			WebDriverWait wait = new WebDriverWait(drivers.get(0), 30);
+			String mensaje = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText(); /*
 								 * Pasamos al siguiente html donde nos encontramos con el mensaje, que tendremos
 								 * que validar
 								 */
@@ -83,8 +81,6 @@ public class PruebasSistemaTest {
 		} else {
 			drivers.add(new ChromeDriver());//Creamos otro para el otro usuario
 			inicializar();
-			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30);
-			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30);
 			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click();
 			drivers.get(1).findElement(By.id("product-" + pedidoGenerico.get(1).getIdP())).click();
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
@@ -94,11 +90,11 @@ public class PruebasSistemaTest {
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
 			// Thread.sleep(1000);
 			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
-			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
-			String mensaje0 = drivers.get(0).findElement(By.id("message")).getText();
+			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30);
+			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30);
+			String mensaje0 =  wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
+			String mensaje1 =  wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
 			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
-			String mensaje1 = drivers.get(1).findElement(By.id("message")).getText();
 			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que
 
 		}
