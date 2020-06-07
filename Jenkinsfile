@@ -13,6 +13,7 @@ pipeline {
 	 )       
        }
      }
+    /* Esta parte es mas que nada para hacer la prueba
     stage("Create jar") {
         steps {
             script{
@@ -24,7 +25,7 @@ pipeline {
                 }
             }
         }
-    }
+    }*/
 
 	stage("Test") {
 		steps {
