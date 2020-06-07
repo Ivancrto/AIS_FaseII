@@ -13,6 +13,19 @@ pipeline {
 	 )       
        }
      }
+    stage("Create jar") {
+        steps {
+            script{
+                if(isUnix()) {
+                    sh "mvn package"
+                }
+                else{
+                    bat(/"${MAVEN_HOME}\bin\mvn" package/)
+                }
+            }
+        }
+    }
+
 	stage("Test") {
 		steps {
 			script {
@@ -29,10 +42,10 @@ pipeline {
    }
 	post {
       always {
-	    junit "/**/target/surefire-reports/TEST-*.xml"
+	    junit "AIS_FaseII/**/target/surefire-reports/TEST-*.xml"
       }
       success {
-        archive "/target/*.jar"
+        archive "AIS_FaseII/target/*.jar"
       }
    }
 }
