@@ -14,7 +14,7 @@ pipeline {
        }
      }
     /* Esta parte es mas que nada para hacer la prueba*/
- /*   stage("Create jar") {
+    stage("Create jar") {
         steps {
             script{
                 if(isUnix()) {
@@ -25,16 +25,16 @@ pipeline {
                 }
             }
         }
-    }*/
+    }
 
 	stage("Test") {
 		steps {
 			script {
 		 		if(isUnix()) {
-			 		sh "./mvnw test ; clean package"
+			 		sh "./mvnw test"
 			 	} 
 				else {
-		 			 bat(/"${MAVEN_HOME}\bin\mvn" test; clean package/)
+		 			 bat(/"${MAVEN_HOME}\bin\mvn" test/)
 				}
 	    
 			}
