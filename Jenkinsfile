@@ -44,7 +44,6 @@ pipeline {
 	post {
       		always {
 	  		  junit "target/surefire-reports/TEST-*.xml"
-			  archiveArtifacts  "target/out.log"
 	      }	
      		 success {
          	
