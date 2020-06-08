@@ -65,14 +65,12 @@ public class PruebasSistemaTest {
 	public void Test(ArrayList<Pedido> pedidoGenerico) throws InterruptedException {
 
 		if (pedidoGenerico.get(0).getIdP() != 1) {
-			inicializar();
-			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click(); // numero del
-																									// producto
+			inicializar(pedidoGenerico.get(0).getIdP());
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
 																														// del
 																														// customer
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			WebDriverWait wait = new WebDriverWait(drivers.get(0), 100);
+			WebDriverWait wait = new WebDriverWait(drivers.get(0), 30);
 			wait.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
 			String mensaje =  drivers.get(0).findElement(By.id("message")).getText(); /*
 								 * Pasamos al siguiente html donde nos encontramos con el mensaje, que tendremos
@@ -81,9 +79,7 @@ public class PruebasSistemaTest {
 			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
 		} else {
 			drivers.add(new ChromeDriver());//Creamos otro para el otro usuario
-			inicializar();
-			drivers.get(0).findElement(By.id("product-" + pedidoGenerico.get(0).getIdP())).click();
-			drivers.get(1).findElement(By.id("product-" + pedidoGenerico.get(1).getIdP())).click();
+			inicializar(pedidoGenerico.get(0).getIdP());
 			drivers.get(0).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(0).getIdC())); // numero
 																														// cliente
 			drivers.get(1).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(1).getIdC())); // numero
@@ -91,8 +87,8 @@ public class PruebasSistemaTest {
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
 			// Thread.sleep(1000);
 			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 100);
-			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 100);
+			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30);
+			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30);
 			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
 			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
 			String mensaje0 =  drivers.get(0).findElement(By.id("message")).getText();
@@ -104,9 +100,9 @@ public class PruebasSistemaTest {
 
 	}
 	
-	public void inicializar() {
+	public void inicializar(long n) {
 		for (WebDriver driver : drivers) {
-			driver.get("http://localhost:8081");
+			driver.get("http://localhost:8081/product/" + n);
 		}
 		
 	}
