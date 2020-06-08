@@ -44,10 +44,11 @@ pipeline {
 	post {
       		always {
 	  		  junit "target/surefire-reports/TEST-*.xml"
+			  archive "target/out.log"
 	      }	
      		 success {
-         		 junit "target/surefire-reports/TEST-*.xml"
-   			  archiveArtifacts "target/*.jar"
+         	
+   			  archive "target/resultado.jar"
     		  }
  	  }
 }
