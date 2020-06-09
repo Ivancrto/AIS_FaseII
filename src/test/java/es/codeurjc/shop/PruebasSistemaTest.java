@@ -26,7 +26,7 @@ public class PruebasSistemaTest {
 
 	public static Collection<Object[]> data() {
 		TestingScenarios scenarios = new TestingScenarios();
-		Object[][] data = { { scenarios.scenario1W }, { scenarios.scenario2W }, { scenarios.scenario3W } };
+		Object[][] data = { { scenarios.scenario1S }, { scenarios.scenario2S }, { scenarios.scenario3S } };
 		return Arrays.asList(data);
 	}
 
@@ -36,29 +36,30 @@ public class PruebasSistemaTest {
 	@BeforeAll
 	public static void setupClass() {
 		WebDriverManager.chromedriver().setup();
-		Application.start();
+		Application.start();//Levantamos la aplicacion
 	}
 
 	@AfterAll
 	public static void teardownClass() {
-		Application.stop();
+		Application.stop();//Paramos la aplicacion
 	}
 
 	@BeforeEach
 	public void setupTest() {
-		drivers.add(new ChromeDriver());
+		drivers.add(new ChromeDriver()); //Creamos los navegadores
 	}
 
 	@AfterEach
 	public void teardown() {
 		for (WebDriver driver : drivers) {
 			if (driver != null) {
-				driver.quit();
+				driver.quit();//Cerramos los navegadores
 			}
 		}
 		drivers.clear();
 	}
 
+	//En un primer momento empezaba desde 
 	
 	@ParameterizedTest
 	@MethodSource("data")
@@ -76,7 +77,7 @@ public class PruebasSistemaTest {
 								 * Pasamos al siguiente html donde nos encontramos con el mensaje, que tendremos
 								 * que validar
 								 */
-			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
+			assertThat(mensaje).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que se esperaba
 		} else {
 			drivers.add(new ChromeDriver());//Creamos otro para el otro usuario
 			inicializar(pedidoGenerico.get(0).getIdP());
@@ -89,12 +90,12 @@ public class PruebasSistemaTest {
 			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
 			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30);
 			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30);
-			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
-			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();
-			String mensaje0 =  drivers.get(0).findElement(By.id("message")).getText();
-			String mensaje1 =  drivers.get(1).findElement(By.id("message")).getText();
-			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que
-			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que
+			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();//0 Esperamos por si la pagina no se cargo
+			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();//1 Esperamos por si la pagina no se cargo
+			String mensaje0 =  drivers.get(0).findElement(By.id("message")).getText();//Obtenemos el mensaje del primer navegador
+			String mensaje1 =  drivers.get(1).findElement(By.id("message")).getText();//Obtenemos el mensaje del segundo navegador
+			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que se esperaba, si se realiza
+			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que se esperaba, no se realiza
 
 		}
 
@@ -102,7 +103,7 @@ public class PruebasSistemaTest {
 	
 	public void inicializar(long n) {
 		for (WebDriver driver : drivers) {
-			driver.get("http://localhost:8081/product/" + n);
+			driver.get("http://localhost:8081/product/" + n); //Le decimos la url al navegador
 		}
 		
 	}

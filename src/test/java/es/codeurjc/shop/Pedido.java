@@ -45,8 +45,15 @@ public class Pedido {
 		this.msg= msg;
 	}
 	
+	//Contructor 2 parte (SISTEMA)
+	public Pedido(long idC,long idP, String msg) {
+		this.idP = idP;
+		this.idC = idC;
+		this.msg= msg;
+	}
+	
 
-
+	//Contructor 3 parte (API)
 	public Pedido(long idP, long idC, int statusAPI,String m, String messageAPI,int id) {
 		this.idP = idP;
 		this.idC = idC;

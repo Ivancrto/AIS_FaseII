@@ -48,6 +48,7 @@ pipeline {
      		 success {
          	
    			  archiveArtifacts 'target/*.jar'
+   			  archiveArtifacts 'log.txt'
     		  }
  	  }
 }
