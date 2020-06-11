@@ -87,14 +87,17 @@ public class PruebasSistemaTest {
 			drivers.get(1).findElement(By.id("customer-id")).sendKeys(String.valueOf(pedidoGenerico.get(1).getIdC())); // numero
 																														// cliente
 			drivers.get(0).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			// Thread.sleep(1000);
 			drivers.get(1).findElement(By.xpath("//input[@value='Purchase']")).click(); // click para realizar la compra
-			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30);
-			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30);
-			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();//0 Esperamos por si la pagina no se cargo
-			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message"))).getText();//1 Esperamos por si la pagina no se cargo
+			
+			WebDriverWait wait0 = new WebDriverWait(drivers.get(0), 30); //Creamos el objeto wait0
+			WebDriverWait wait1 = new WebDriverWait(drivers.get(1), 30); //Creamos el objeto wait1
+			
+			wait0.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));//0 Esperamos por si la pagina no se cargo
+			wait1.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));//1 Esperamos por si la pagina no se cargo
+			
 			String mensaje0 =  drivers.get(0).findElement(By.id("message")).getText();//Obtenemos el mensaje del primer navegador
 			String mensaje1 =  drivers.get(1).findElement(By.id("message")).getText();//Obtenemos el mensaje del segundo navegador
+			
 			assertThat(mensaje0).isEqualTo(pedidoGenerico.get(0).getMsg()); // Comprobamos si el mensaje es el que se esperaba, si se realiza
 			assertThat(mensaje1).isEqualTo(pedidoGenerico.get(1).getMsg()); // Comprobamos si el mensaje es el que se esperaba, no se realiza
 
