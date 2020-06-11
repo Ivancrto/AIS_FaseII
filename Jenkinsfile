@@ -13,28 +13,16 @@ pipeline {
 	 )       
        }
      }
-    /* Esta parte es mas que nada para hacer la prueba
-    stage("Create jar") {
-        steps {
-            script{
-                if(isUnix()) {
-                    sh "mvn package"
-                }
-                else{
-                    bat(/"${MAVEN_HOME}\bin\mvn" package/)
-                }
-            }
-        }
-    }*/
+ 
 
 	stage("Test") {
 		steps {
 			script {
 		 		if(isUnix()) {
-			 		sh "./mvnw test"
+			 		sh "mvn test"
 			 	} 
 				else {
-		 			 bat(/"${MAVEN_HOME}\bin\mvn" test/)
+		 			 bat("mvn test")
 				}
 	    
 			}
@@ -47,10 +35,8 @@ pipeline {
 	      }	
      		 success {
          	
-   			  archiveArtifacts 'target/*.jar'
-   			  archiveArtifacts 'log.txt'
+   	
+   			  archiveArtifacts "log.txt"
     		  }
  	  }
 }
-
-

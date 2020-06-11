@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>es.codeurjc.test</groupId>
-	<artifactId>testing-shop</artifactId>
+	<artifactId>ab.fajardo.2017-i.conde.2017</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>

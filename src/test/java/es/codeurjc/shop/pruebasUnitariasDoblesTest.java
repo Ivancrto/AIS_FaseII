@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -23,25 +24,25 @@ import es.codeurjc.shop.notification.NotificationService;
 Para su implementación, dado que se trata de tests unitarios, se usarán dobles para todas las
 dependencias de la clase: PurchaseRepository, CustomerService, ProductService y NotificationService.*/
 
+@DisplayName("Pruebas unitarias con dobles de la clase PurchaseService")
 public class pruebasUnitariasDoblesTest {
 
-	public static Collection<Object[]> data() {
+	public static Collection<Object[]> data() {	
 
 		TestingScenarios s = new TestingScenarios();
-		Object[][] data = { { s.scenario1 }, { s.scenario2 }, { s.scenario3 } };
+		Object[][] data = { { s.scenario1, " Caso Correcto" }, { s.scenario2, " Sin credito" }, { s.scenario3, " Sin stock" } };
 
 		return Arrays.asList(data);
 	}
 
 	/* *********************************** */
 
-	@ParameterizedTest
+	@DisplayName("Test genérico")
+	@ParameterizedTest(name = "{index}: {1}")
 	@MethodSource("data")
-	public void generico(List<Pedido> pedidoGenerico) throws ShopException {
+	public void generico(List<Pedido> pedidoGenerico, String c) throws ShopException {
 		// Given
-		PurchaseRepository purchaseRep = mock(PurchaseRepository.class); // Este mock no se usa para nada, ya que las
-																			// modificaciones al repo
-																			// se hace mediante los Services
+		PurchaseRepository purchaseRep = mock(PurchaseRepository.class); 
 		CustomerService customerServ = mock(CustomerService.class);
 		ProductService productServ = mock(ProductService.class);
 		NotificationService notificationServ = mock(NotificationService.class);
@@ -49,12 +50,7 @@ public class pruebasUnitariasDoblesTest {
 		PurchaseService purchaseServ = new PurchaseService(purchaseRep, customerServ, productServ, notificationServ);
 
 		// Mock getProuctCost
-		when(productServ.getProductCost(pedidoGenerico.get(0).getIdP())).thenReturn(pedidoGenerico.get(0).getCost()); // En
-																														// cualquiera
-																														// de
-																														// los
-																														// 3
-																														// casos
+		when(productServ.getProductCost(anyLong())).thenReturn(pedidoGenerico.get(0).getCost()); // En cualquiera de los 3 casos
 
 		// Mock withdrawProduct
 		if (pedidoGenerico.get(0).getIdC() == 3)
@@ -70,18 +66,18 @@ public class pruebasUnitariasDoblesTest {
 		when(purchaseRep.save(any())).thenReturn(null);
 
 		// When
-		if (pedidoGenerico.get(0).getIdC() == 3) {
+		if (pedidoGenerico.get(0).getIdC() == 3) {	//Caso sin stock
 			ProductStockWithdrawExceededException e1 = Assertions.assertThrows(
 					ProductStockWithdrawExceededException.class,
-					() -> purchaseServ.createPurchase(3, pedidoGenerico.get(0).getIdP()));
-			// Preguntar al profesor si hay que hacer un assertEquals
-		} else if (pedidoGenerico.get(0).getIdC() == 2) {
+					() -> purchaseServ.createPurchase(3, pedidoGenerico.get(0).getIdP()));	//Capturamos la excepcion
+			
+		} else if (pedidoGenerico.get(0).getIdC() == 2) {	//Caso sin credito
 			CustomerCreditLimitExceededException e2 = Assertions.assertThrows(
 					CustomerCreditLimitExceededException.class,
-					() -> purchaseServ.createPurchase(2, pedidoGenerico.get(0).getIdP()));
-			// Preguntar al profesor si hay que hacer un assertEquals
+					() -> purchaseServ.createPurchase(2, pedidoGenerico.get(0).getIdP()));	//Capturamos la excepcion
+			
 		} else {
-			purchaseServ.createPurchase(pedidoGenerico.get(0).getIdC(), pedidoGenerico.get(0).getIdP());
+			purchaseServ.createPurchase(pedidoGenerico.get(0).getIdC(), pedidoGenerico.get(0).getIdP());	//En el caso de que todo deba salir bien, ejecutamos sin mas, sin capturar excepciones
 		}
 
 		// Then

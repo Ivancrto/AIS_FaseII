@@ -21,6 +21,7 @@ public class Pedido {
 	public Pedido() {		
 	}
 
+	//Constructor 1 Pruebas unitarias con dobles
 	public Pedido(long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save) {
 		this.idP = idP;
 		this.idC = idC;
@@ -33,17 +34,6 @@ public class Pedido {
 		this.msg="Purchase: customer=" + this.idC + ", product=" + this.idP;
 	}
 	
-	public Pedido(long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save, String msg) {
-		this.idP = idP;
-		this.idC = idC;
-		this.cost = cost;
-		this.getProductCost = getProductCost;
-		this.withdrawProduct = withdrawProduct;
-		this.reserveCredit = reserveCredit;
-		this.notify = notify;
-		this.save = save;
-		this.msg= msg;
-	}
 	
 	//Contructor 2 parte (SISTEMA)
 	public Pedido(long idC,long idP, String msg) {

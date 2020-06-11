@@ -30,15 +30,11 @@ public class TestingScenarios {
 		scenario1API = new ArrayList<Pedido>();
 		scenario2API = new ArrayList<Pedido>();
 		scenario3API = new ArrayList<Pedido>();
-
-		Pedido p = new Pedido(1, 1, 350, 1, 1, 1, 1, 1);
-		scenario1.add(p); // Caso correcto
-
-		p = new Pedido(2, 1, 60, 1, 1, 1, 0, 0);
-		scenario2.add(p); // Caso sin credito
-
-		p = new Pedido(3, 1, 4999, 1, 1, 0, 0, 0);
-		scenario3.add(p); // Caso sin stock
+		
+		//long idC,long idP, long cost, int getProductCost, int withdrawProduct, int reserveCredit, int notify, int save
+		scenario1.add(new Pedido(1, 1, 350, 1, 1, 1, 1, 1)); // Caso correcto
+		scenario2.add(new Pedido(2, 1, 60, 1, 1, 1, 0, 0)); // Caso sin credito
+		scenario3.add(new Pedido(3, 1, 4999, 1, 1, 0, 0, 0)); // Caso sin stock
 
 		// long idC,long idP, long cost, int getProductCost, int withdrawProduct, int
 		// reserveCredit, int notify, int save
@@ -52,7 +48,6 @@ public class TestingScenarios {
 		scenario1API.add(new Pedido(3, 6, 200, "id", "", 7));
 		scenario2API.add(new Pedido(3, 5, 400, "message", "CustomerCreditLimitExceededException", 0));
 		scenario3API.add(new Pedido(2, 4, 400, "message", "ProductStockWithdrawExceededException", 0));
-
 	}
 
 }

@@ -20,13 +20,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import es.codeurjc.shop.Application;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
+@DisplayName("Pruebas de sistema de pedidos mediante la interfaz web")
 public class PruebasSistemaTest {
 
 
 	public static Collection<Object[]> data() {
 		TestingScenarios scenarios = new TestingScenarios();
-		Object[][] data = { { scenarios.scenario1S }, { scenarios.scenario2S }, { scenarios.scenario3S } };
+		Object[][] data = { { scenarios.scenario1S, " Caso correcto" }, { scenarios.scenario2S, " Sin credito" }, { scenarios.scenario3S, " Sin stock" } };
 		return Arrays.asList(data);
 	}
 
@@ -61,9 +61,10 @@ public class PruebasSistemaTest {
 
 	//En un primer momento empezaba desde 
 	
-	@ParameterizedTest
+	@DisplayName("Test genérico")
+	@ParameterizedTest(name = "{index}: {1}")
 	@MethodSource("data")
-	public void Test(ArrayList<Pedido> pedidoGenerico) throws InterruptedException {
+	public void Test(ArrayList<Pedido> pedidoGenerico, String c) throws InterruptedException {
 
 		if (pedidoGenerico.get(0).getIdP() != 1) {
 			inicializar(pedidoGenerico.get(0).getIdP());
@@ -103,7 +104,7 @@ public class PruebasSistemaTest {
 	
 	public void inicializar(long n) {
 		for (WebDriver driver : drivers) {
-			driver.get("http://localhost:8081/product/" + n); //Le decimos la url al navegador
+			driver.get("http://localhost:8080/product/" + n); //Le decimos la url al navegador
 		}
 		
 	}
